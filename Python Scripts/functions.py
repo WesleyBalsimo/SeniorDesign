@@ -1,118 +1,134 @@
+import machine
 from machine import Pin
 from time import sleep_ms
 
+#global x, y coordinates
+coord = [0, 0]
+
 # Motor output
+
+#motor 1 output pins
 pin0 = machine.Pin(0, Pin.OUT)
 pin1 = machine.Pin(1, Pin.OUT)
 pin2 = machine.Pin(2, Pin.OUT)
 pin3 = machine.Pin(3, Pin.OUT)
 
-def pos1():
-    pin0.value(0)
-    pin1.value(0)
-    pin2.value(0)
-    pin3.value(1)
+motor1 = [pin0, pin1, pin2, pin3]
 
-def pos1_5():
-    pin0.value(0)
-    pin1.value(0)
-    pin2.value(1)
-    pin3.value(1)   
+#motor 2 output pins
+pin4 = machine.Pin(4, Pin.OUT)
+pin5 = machine.Pin(5, Pin.OUT)
+pin6 = machine.Pin(6, Pin.OUT)
+pin7 = machine.Pin(7, Pin.OUT)
 
-def pos2():
-    pin0.value(0)
-    pin1.value(0)
-    pin2.value(1)
-    pin3.value(0)
+motor2 = [pin4, pin5, pin6, pin7]
 
-def pos2_5():
-    pin0.value(0)
-    pin1.value(1)
-    pin2.value(1)
-    pin3.value(0)
+def pos1(motor):
+    motor[0].value(0)
+    motor[1].value(0)
+    motor[2].value(0)
+    motor[3].value(1)
 
-def pos3():
-    pin0.value(0)
-    pin1.value(1)
-    pin2.value(0)
-    pin3.value(0)
+def pos1_5(motor):
+    motor[0].value(0)
+    motor[1].value(0)
+    motor[2].value(1)
+    motor[3].value(1)   
 
-def pos3_5():
-    pin0.value(1)
-    pin1.value(1)
-    pin2.value(0)
-    pin3.value(0)
+def pos2(motor):
+    motor[0].value(0)
+    motor[1].value(0)
+    motor[2].value(1)
+    motor[3].value(0)
 
-def pos4():
-    pin0.value(1)
-    pin1.value(0)
-    pin2.value(0)
-    pin3.value(0)
+def pos2_5(motor):
+    motor[0].value(0)
+    motor[1].value(1)
+    motor[2].value(1)
+    motor[3].value(0)
 
-def pos4_5():
-    pin0.value(1)
-    pin1.value(0)
-    pin2.value(0)
-    pin3.value(1)
+def pos3(motor):
+    motor[0].value(0)
+    motor[1].value(1)
+    motor[2].value(0)
+    motor[3].value(0)
 
-def sleep():
-    pin0.value(0)
-    pin1.value(0)
-    pin2.value(0)
-    pin3.value(0)
+def pos3_5(motor):
+    motor[0].value(1)
+    motor[1].value(1)
+    motor[2].value(0)
+    motor[3].value(0)
 
-def fullstep_forward():
-    pos1()
-    sleep_ms(3)
-    pos2()
-    sleep_ms(3)
-    pos3()
-    sleep_ms(3)
-    pos4()
-    sleep()
+def pos4(motor):
+    motor[0].value(1)
+    motor[1].value(0)
+    motor[2].value(0)
+    motor[3].value(0)
 
-def halfstep_forward():
-    pos1()
-    sleep_ms(3)
-    pos1_5()
-    sleep_ms(3)
-    pos2()
-    sleep_ms(3)
-    pos2_5()
-    sleep_ms(3)
-    pos3()
-    sleep_ms(3)
-    pos3_5()
-    sleep_ms(3)
-    pos4()
-    sleep_ms(3)
-    pos4_5()
-    sleep()
+def pos4_5(motor):
+    motor[0].value(1)
+    motor[1].value(0)
+    motor[2].value(0)
+    motor[3].value(1)
 
-def fullstep_backward():
-    pos4()
+def sleep(motor):
+    motor[0].value(0)
+    motor[1].value(0)
+    motor[2].value(0)
+    motor[3].value(0)
+
+def fullstep_forward(motor):
+    pos1(motor)
     sleep_ms(3)
-    pos3()
+    pos2(motor)
     sleep_ms(3)
-    pos2()
+    pos3(motor)
     sleep_ms(3)
-    pos1()
+    pos4(motor)
+    sleep(motor)
+
+def halfstep_forward(motor):
+    pos1(motor)
+    sleep_ms(3)
+    pos1_5(motor)
+    sleep_ms(3)
+    pos2(motor)
+    sleep_ms(3)
+    pos2_5(motor)
+    sleep_ms(3)
+    pos3(motor)
+    sleep_ms(3)
+    pos3_5(motor)
+    sleep_ms(3)
+    pos4(motor)
+    sleep_ms(3)
+    pos4_5(motor)
+    sleep(motor)
+
+def fullstep_backward(motor):
+    pos4(motor)
+    sleep_ms(3)
+    pos3(motor)
+    sleep_ms(3)
+    pos2(motor)
+    sleep_ms(3)
+    pos1(motor)
     sleep_ms(3)
 
-def halfstep_backward():
-    pos4_5()
+def halfstep_backward(motor):
+    pos4_5(motor)
     sleep_ms(3)
-    pos4()
+    pos4(motor)
     sleep_ms(3)
-    pos3_5()
+    pos3_5(motor)
     sleep_ms(3)
-    pos3()
+    pos3(motor)
     sleep_ms(3)
-    pos2_5()
+    pos2_5(motor)
     sleep_ms(3)
-    pos2()
+    pos2(motor)
     sleep_ms(3)
-    pos1_5()
+    pos1_5(motor)
     sleep_ms(3)
-    pos1()
-    sleep()
+    pos1(motor)
+    sleep(motor)
