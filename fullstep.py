@@ -31,15 +31,21 @@ def pos4():
     pin2.value(0)
     pin3.value(0)
 
+def sleep():
+    pin0.value(0)
+    pin1.value(0)
+    pin2.value(0)
+    pin3.value(0)
+
 def fullstep_forward():
     pos1()
-    sleep_ms(10)
+    sleep_ms(3)
     pos2()
-    sleep_ms(10)
+    sleep_ms(3)
     pos3()
-    sleep_ms(10)
+    sleep_ms(3)
     pos4()
-    sleep_ms(10)
+    sleep_ms(3)
 
 def main():
     while 1:
