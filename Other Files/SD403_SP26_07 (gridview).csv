@@ -1,0 +1,12 @@
+﻿1 Ohm,1.5 Ohm,2.2 Ohm,3.3 Ohm,3.9 Ohm,4.7 Ohm,6.8 Ohm,10 Ohm
+15 Ohm,22 Ohm,33 Ohm,39 Ohm,47 Ohm,56 Ohm,68 Ohm,82 Ohm
+100 Ohm,120 Ohm,150 Ohm,220 Ohm,270 Ohm,330 Ohm,390 Ohm,470 Ohm
+560 Ohm,680 Ohm,820 Ohm,1k Ohm,1.2k Ohm,1.5k Ohm,1.8k Ohm,2.2k Ohm
+2.7k Ohm,3.3k Ohm,3.9k Ohm,4.7k Ohm,5.6k Ohm,6.8k Ohm,8.2k Ohm,10k Ohm
+12k Ohm,15k Ohm,18k Ohm,22k Ohm,27k Ohm,33k Ohm,39k Ohm,47k Ohm
+56k Ohm,68k Ohm,82k Ohm,100k Ohm,120k Ohm,150k Ohm,180k Ohm,220k Ohm
+270k Ohm,330k Ohm,390k Ohm,470k Ohm,560k Ohm,680k Ohm,820k Ohm,1M Ohm
+,,,,,,,
+,,,,,,,
+16 pF,100 nF,470 nF,1 nF,10 uF,,,
+47 uF,100uF,220 uF,330 uF,1 F,,,
