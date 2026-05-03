@@ -4,6 +4,9 @@ from time import sleep_ms
 
 #global x, y coordinates
 coord = [0, 0]
+#enumeration for x and y coordinates
+x = 0 # coord[x] --> coord[0]
+y = 1 # coord[y] --> coord[1]
 
 # Motor output
 

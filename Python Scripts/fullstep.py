@@ -3,9 +3,12 @@ from time import sleep_ms
 import functions
   
 def main():
+    size = 0
     for i in range(50):
         functions.fullstep_forward(functions.motor1)
+        size = size + 1
     functions.sleep(functions.motor1)
+    print(size)
 
 if __name__ == "__main__":
     main()
