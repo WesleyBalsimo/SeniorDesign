@@ -1,14 +1,16 @@
+import machine
 from machine import Pin
 from time import sleep_ms
 import functions
 
-pin9 = machine.Pin(9, Pin.IN)
+def calibrate(pin, motor):
+    while pin.value() == 0:
+        functions.halfstep_backward(motor)
+    functions.coord[0] = 0
+    functions.sleep(motor)
 
 def main():
-    while pin9.value() == 0:
-        functions.halfstep_backward(functions.motor1)
-    
-    
+    calibrate(functions.pin_x, functions.motor1)
 
 if __name__ == "__main__":
     main()

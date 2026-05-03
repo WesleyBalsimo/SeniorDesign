@@ -23,6 +23,9 @@ pin7 = machine.Pin(7, Pin.OUT)
 
 motor2 = [pin4, pin5, pin6, pin7]
 
+pin_x = machine.Pin(8, Pin.IN, machine.Pin.PULL_UP)
+pin_y = machine.Pin(9, Pin.IN, machine.Pin.PULL_UP)
+
 
 #define motor positions for full step and half step sequences
 def pos1(motor):
@@ -80,58 +83,58 @@ def sleep(motor):
     motor[3].value(0)
 
 #define movement functions for full step and half step sequences
+def quarterstep_forward(motor):
+    pos1(motor)
+    sleep_ms(2)
+    pos2(motor)
+    sleep_ms(2)
+    pos3(motor)
+    sleep_ms(2)
+    pos4(motor)
+    sleep_ms(2)
+
 def fullstep_forward(motor):
     pos1(motor)
-    sleep_ms(3)
-    pos2(motor)
-    sleep_ms(3)
-    pos3(motor)
-    sleep_ms(3)
-    pos4(motor)
-    sleep_ms(3)
-
-def halfstep_forward(motor):
-    pos1(motor)
-    sleep_ms(3)
+    sleep_ms(2)
     pos1_5(motor)
-    sleep_ms(3)
+    sleep_ms(2)
     pos2(motor)
-    sleep_ms(3)
+    sleep_ms(2)
     pos2_5(motor)
-    sleep_ms(3)
+    sleep_ms(2)
     pos3(motor)
-    sleep_ms(3)
+    sleep_ms(2)
     pos3_5(motor)
-    sleep_ms(3)
+    sleep_ms(2)
     pos4(motor)
-    sleep_ms(3)
+    sleep_ms(2)
     pos4_5(motor)
-    sleep_ms(3)
+    sleep_ms(2)
+
+def quarterstep_backward(motor):
+    pos4(motor)
+    sleep_ms(2)
+    pos3(motor)
+    sleep_ms(2)
+    pos2(motor)
+    sleep_ms(2)
+    pos1(motor)
+    sleep_ms(2)
 
 def fullstep_backward(motor):
-    pos4(motor)
-    sleep_ms(3)
-    pos3(motor)
-    sleep_ms(3)
-    pos2(motor)
-    sleep_ms(3)
-    pos1(motor)
-    sleep_ms(3)
-
-def halfstep_backward(motor):
     pos4_5(motor)
-    sleep_ms(3)
+    sleep_ms(2)
     pos4(motor)
-    sleep_ms(3)
+    sleep_ms(2)
     pos3_5(motor)
-    sleep_ms(3)
+    sleep_ms(2)
     pos3(motor)
-    sleep_ms(3)
+    sleep_ms(2)
     pos2_5(motor)
-    sleep_ms(3)
+    sleep_ms(2)
     pos2(motor)
-    sleep_ms(3)
+    sleep_ms(2)
     pos1_5(motor)
-    sleep_ms(3)
+    sleep_ms(2)
     pos1(motor)
-    sleep_ms(3)
+    sleep_ms(2)
