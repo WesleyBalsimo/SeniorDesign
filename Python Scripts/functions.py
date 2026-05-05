@@ -91,7 +91,7 @@ def sleep(motor):
     motor[3].value(0)
 
 #define movement functions for full step and half step sequences
-def quarterstep_forward(motor):
+def fullstep_forward(motor):
     pos1(motor)
     sleep_ms(3)
     pos2(motor)
@@ -101,7 +101,7 @@ def quarterstep_forward(motor):
     pos4(motor)
     sleep_ms(3)
 
-def fullstep_forward(motor):
+def halfstep_forward(motor):
     pos1(motor)
     sleep_ms(3)
     pos1_5(motor)
@@ -119,7 +119,7 @@ def fullstep_forward(motor):
     pos4_5(motor)
     sleep_ms(3)
 
-def quarterstep_backward(motor):
+def fullstep_backward(motor):
     pos4(motor)
     sleep_ms(3)
     pos3(motor)
@@ -129,7 +129,7 @@ def quarterstep_backward(motor):
     pos1(motor)
     sleep_ms(3)
 
-def fullstep_backward(motor):
+def halfstep_backward(motor):
     pos4_5(motor)
     sleep_ms(3)
     pos4(motor)

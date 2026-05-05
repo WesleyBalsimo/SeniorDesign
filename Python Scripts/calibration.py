@@ -11,9 +11,9 @@ def calibrate(pin, motor, coord):
     size = 0
 
     while pin.value() == 0:
-        functions.quarterstep_forward(motor)
+        functions.fullstep_forward(motor)
         size = size + 1
-    functions.coord[coord] = 0
+    functions.coord[coord] = size
     functions.sleep(motor)
     print('size of ' + str(coord) + ': ' + str(size))
 
@@ -26,6 +26,8 @@ def main():
     
     lights = off
     functions.boardlight(lights)
+    print(functions.coord[functions.x])
+    print(functions.coord[functions.y])
 
 if __name__ == "__main__":
     main()
