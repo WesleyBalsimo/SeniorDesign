@@ -1,3 +1,6 @@
+# This is mostly a test file to debug and showcase movement
+
+
 from machine import Pin
 from time import sleep_ms
 import functions
