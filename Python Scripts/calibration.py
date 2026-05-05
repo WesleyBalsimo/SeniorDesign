@@ -3,11 +3,9 @@ from machine import Pin
 from time import sleep_ms
 import functions
 
-pin14 = machine.pin(14, Pin.OUT)
-pin14 = 1
-
-def calibrate(pin, motor, coord):
+def calibrate(pin, pullUp, motor, coord):
     size = 0
+    pullUp = 1
     while pin.value() == 0:
         functions.quarterstep_forward(motor)
         size = size + 1
@@ -16,7 +14,7 @@ def calibrate(pin, motor, coord):
     print('size of ' + str(coord) + ': ' + str(size))
 
 def main():
-    calibrate(functions.pin_x, functions.motor1, functions.x)
+    calibrate(functions.pin_x, functions.pinPullUp, functions.motor1, functions.x)
 
 if __name__ == "__main__":
     main()
