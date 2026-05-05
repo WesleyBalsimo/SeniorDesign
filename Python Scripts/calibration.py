@@ -3,6 +3,9 @@ from machine import Pin
 from time import sleep_ms
 import functions
 
+pin14 = machine.pin(14, Pin.OUT)
+pin14 = 1
+
 def calibrate(pin, motor, coord):
     size = 0
     while pin.value() == 0:
