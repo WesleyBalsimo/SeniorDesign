@@ -26,11 +26,14 @@ pin7 = machine.Pin(7, Pin.OUT)
 
 motor2 = [pin4, pin5, pin6, pin7]
 
+#limit switch input pins
 pinLimit_x = machine.Pin(28, Pin.IN, machine.Pin.PULL_UP)
 pinLimit_y = machine.Pin(29, Pin.IN, machine.Pin.PULL_UP)
 
-pinLimitPullUp_x = machine.Pin(26, Pin.IN, machine.Pin.PULL_UP)
-pinLimitPullUp_y = machine.Pin(27, Pin.IN, machine.Pin.PULL_UP)
+pinLimitPullUp_x = machine.Pin(26, Pin.OUT)
+pinLimitPullUp_y = machine.Pin(27, Pin.OUT)
+pinLimitPullUp_x.value(1)
+pinLimitPullUp_y.value(1)
 
 #define motor positions for full step and half step sequences
 def pos1(motor):
@@ -144,16 +147,16 @@ def fullstep_backward(motor):
     pos1(motor)
     sleep_ms(3)
     
-def boardlight():
-	timing = [300, 900, 700, 500]
-	np = Pin(16, Pin.OUT)
-	red = bytearray([0,20,0])
-	green = bytearray([20,0,0])
-	blue = bytearray([0,0,20])
-	while(1):
-    		bitstream(np, 0, timing, red)
-    		sleep(1)
-    		bitstream(np, 0, timing, green)
-    		sleep(1)
-    		bitstream(np, 0, timing, blue)
-    		sleep(1)
+def boardlight(x):
+    timing = [300, 900, 700, 500]
+    np = Pin(16, Pin.OUT)
+    red = bytearray([0,20,0])
+    green = bytearray([20,0,0])
+    blue = bytearray([0,0,20])
+    while(x == 1):
+        bitstream(np, 0, timing, red)
+        sleep(1)
+        bitstream(np, 0, timing, green)
+        sleep(1)
+        bitstream(np, 0, timing, blue)
+        sleep(1)

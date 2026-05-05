@@ -3,9 +3,13 @@ from machine import Pin
 from time import sleep_ms
 import functions
 
-def calibrate(pin, pullUp, motor, coord):
+#enumeration for on and off
+on = 1
+off = 0
+
+def calibrate(pin, motor, coord):
     size = 0
-    pullUp = 1
+
     while pin.value() == 0:
         functions.quarterstep_forward(motor)
         size = size + 1
@@ -13,8 +17,15 @@ def calibrate(pin, pullUp, motor, coord):
     functions.sleep(motor)
     print('size of ' + str(coord) + ': ' + str(size))
 
+#Main function to run calibration sequence for both x and y axes
 def main():
-    calibrate(functions.pin_x, functions.pinPullUp, functions.motor1, functions.x)
+    lights = on
+    functions.boardlight(lights)
+
+    calibrate(functions.pin_x, functions.motor1, functions.x)
+    
+    lights = off
+    functions.boardlight(lights)
 
 if __name__ == "__main__":
     main()
