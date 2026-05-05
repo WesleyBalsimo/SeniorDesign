@@ -26,9 +26,11 @@ pin7 = machine.Pin(7, Pin.OUT)
 
 motor2 = [pin4, pin5, pin6, pin7]
 
-pin_x = machine.Pin(8, Pin.IN, machine.Pin.PULL_UP)
-pin_y = machine.Pin(9, Pin.IN, machine.Pin.PULL_UP)
+pinLimit_x = machine.Pin(28, Pin.IN, machine.Pin.PULL_UP)
+pinLimit_y = machine.Pin(29, Pin.IN, machine.Pin.PULL_UP)
 
+pinLimitPullUp_x = machine.Pin(26, Pin.IN, machine.Pin.PULL_UP)
+pinLimitPullUp_y = machine.Pin(27, Pin.IN, machine.Pin.PULL_UP)
 
 #define motor positions for full step and half step sequences
 def pos1(motor):
