@@ -1,6 +1,6 @@
 import machine
-from machine import Pin
-from time import sleep_ms
+from machine import Pin, bitstream
+from time import sleep_ms, sleep
 
 #global x, y coordinates
 coord = [0, 0]
