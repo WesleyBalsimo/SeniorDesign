@@ -3,6 +3,9 @@ from machine import Pin
 from time import sleep_ms
 import functions
 
+pin14 = machine.Pin(14, Pin.OUT)
+pin14 = 1
+
 def sizeTest(pin, motor, coord):
     size = 0
     while pin.value() == 0:
