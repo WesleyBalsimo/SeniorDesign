@@ -1,6 +1,6 @@
 import machine
 from machine import Pin, bitstream
-from time import sleep_ms, sleep
+from time import sleep_ms
 
 #global x, y coordinates
 coord = [0, 0]
@@ -155,8 +155,8 @@ def boardlight(x):
     blue = bytearray([0,0,20])
     while(x == 1):
         bitstream(np, 0, timing, red)
-        sleep(1)
+        sleep_ms(1000)
         bitstream(np, 0, timing, green)
-        sleep(1)
+        sleep_ms(1000)
         bitstream(np, 0, timing, blue)
-        sleep(1)
+        sleep_ms(1000)

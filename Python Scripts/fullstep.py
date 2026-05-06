@@ -7,7 +7,7 @@ import functions
   
 def main():
     size = 0
-    for i in range(50):
+    while(1):
         functions.fullstep_forward(functions.motor1)
         size = size + 1
     functions.sleep(functions.motor1)

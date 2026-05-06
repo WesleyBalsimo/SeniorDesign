@@ -15,19 +15,15 @@ def calibrate(pin, motor, coord):
         size = size + 1
     functions.coord[coord] = size
     functions.sleep(motor)
-    print('size of ' + str(coord) + ': ' + str(size))
 
 #Main function to run calibration sequence for both x and y axes
 def main():
-    lights = on
-    functions.boardlight(lights)
 
-    calibrate(functions.pin_x, functions.motor1, functions.x)
-    
-    lights = off
-    functions.boardlight(lights)
-    print(functions.coord[functions.x])
-    print(functions.coord[functions.y])
+    calibrate(functions.pinLimit_x, functions.motor1, functions.x)
+    #calibrate(functions.pinLimit_y, functions.motor2, functions.y)
+
+    print('X Coordinate: ' + str(functions.coord[functions.x]))
+    print('Y Coordinate: ' + str(functions.coord[functions.y]))
 
 if __name__ == "__main__":
     main()
