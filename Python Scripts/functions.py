@@ -30,10 +30,10 @@ motor2 = [pin4, pin5, pin6, pin7]
 pinLimit_x = machine.Pin(28, Pin.IN, machine.Pin.PULL_UP)
 pinLimit_y = machine.Pin(29, Pin.IN, machine.Pin.PULL_UP)
 
-pinLimitPullUp_x = machine.Pin(26, Pin.OUT)
-pinLimitPullUp_y = machine.Pin(27, Pin.OUT)
-pinLimitPullUp_x.value(1)
-pinLimitPullUp_y.value(1)
+# pinLimitPullUp_x = machine.Pin(26, Pin.OUT)
+# pinLimitPullUp_y = machine.Pin(27, Pin.OUT)
+# pinLimitPullUp_x.value(1)
+# pinLimitPullUp_y.value(1)
 
 #define motor positions for full step and half step sequences
 def pos1(motor):
@@ -147,6 +147,8 @@ def halfstep_backward(motor):
     pos1(motor)
     sleep_ms(3)
     
+
+#This function doesnt really work at the moment
 def boardlight(x):
     timing = [300, 900, 700, 500]
     np = Pin(16, Pin.OUT)
