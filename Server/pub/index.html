@@ -12,7 +12,10 @@
       <div id="categories">
         <h2 id="home" class="category" onclick="showHome()">Home</h2>
       </div>
-      <h2 id="update" onclick="updateCSV()">Update Inventory</h2>
+      <div id="update">
+        <input id="updateInput" type="file" accept=".csv" onchange="updateCSV()" hidden/>
+        <label for="updateInput">Update Inventory</label>
+      </div>
     </header>
     <main id="items">
       <div class="category-Home">

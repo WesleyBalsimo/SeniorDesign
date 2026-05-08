@@ -19,7 +19,7 @@ function setupWebSockets(reconnect_time) {
     const view = new DataView(event.data);
     const packet_id = view.getUint8(0);
     if (packet_id == 0x00) {
-      queue_position = view.getUint8(1);
+      const queue_position = view.getUint8(1);
       alert(`Oops, someone is already using the robot right now! Current queue positon: ${queue_position}`);
     } else if (packet_id == 0x01) {
       alert("Moving the robot to your part's location!");
@@ -28,6 +28,9 @@ function setupWebSockets(reconnect_time) {
     } else if (packet_id == 0x03) {
       alert("CSV has been successfully updated!");
     } else if (packet_id == 0x04) {
+      const invalid_line = view.getUint16(1);
+      alert(`CSV has invalid syntax on line (${invalid_line}). Make sure you are just exporting the execl sheet!`);
+    } else {
       alert("An unexpected error has occured! Please try again soon!");
     }
   };
@@ -90,8 +93,36 @@ async function getCategories() {
 }
 
 async function updateCSV() {
+  const input = document.getElementById("updateInput");
+  const file = input.files[0];
+  if (!file) {
+    alert("You must supply a csv file to update the inventory!");
+    return;
+  }
+
   const password = prompt("Enter admin password:");
-  
+  if (!password) {
+    alert("You must enter a password to update the inventory!");
+    return;
+  }
+
+  const csv = await file.text();
+
+  const encoder = new TextEncoder();
+
+  const passwordBytes = encoder.encode(password);
+  const csvBytes = encoder.encode(csv);
+
+  const buffer = new Uint8Array(2 + passwordBytes.length + csvBytes.length);
+
+  buffer[0] = 0x01;
+  buffer[1] = passwordBytes.length;
+  buffer.set(passwordBytes, 2);
+  buffer.set(csvBytes, 2 + passwordBytes.length);
+
+  ws.send(buffer);
+
+  window.location.reload(); // Reload to update the UI with new items, and to reset the input
 }
 
 // ------------------------ UPDATING DOM WITH CATEGORIES ------------------------
@@ -105,15 +136,17 @@ function create(htmlStr) {
   return frag;
 }
 
-function selectItem(item_location) {
-  if (item_location.length() == 2) {
+function selectItem(location_raw) {
+  item_location = location_raw.trim();
+  console.log("Selected item '" + item_location + `' (${item_location.length})`);
+  if (item_location.length !== 2) {
     alert("This item's location has been configured incorrectly! Contact the administrator to fix the issue.");
   }
   var buffer = new ArrayBuffer(3);
   var view = new DataView(buffer);
   view.setUint8(0, 0x00);
-  view.setUint8(1, item_location.charAt(0));
-  view.setUint8(2, item_location.charAt(1));
+  view.setUint8(1, item_location.charCodeAt(0));
+  view.setUint8(2, item_location.charCodeAt(1));
   ws.send(buffer);
 }
 
@@ -142,7 +175,7 @@ function addCategory(name, items) {
 
   for (const item of items) {
     const button = document.createElement("button");
-    button.onclick = () => selectItem(name, item[1]);
+    button.onclick = () => selectItem(item[1]);
     const img = document.createElement('img');
     if (name == "Resistor") {
       colorResistor(img, item[0]);
