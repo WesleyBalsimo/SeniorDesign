@@ -1,0 +1,21 @@
+Type,Name,Location
+Resistor,100,1A
+Resistor,500,1B
+Resistor,1k,1C
+Resistor,3.3k,1D
+Resistor,4.7k,1E
+Resistor,5k,1F
+Resistor,10k,1G
+Capacitor Unpolarized,1n,2A
+Capacitor Unpolarized,5n,2B
+Capacitor Unpolarized,10n,2C
+Capacitor Unpolarized,50n,2D
+Capacitor Unpolarized,100n,2E
+Capacitor Unpolarized,1u,2F
+Capacitor Polarized,1n,3A
+Capacitor Polarized,5n,3B
+Capacitor Polarized,10n,3C
+Capacitor Polarized,50n,3D
+Capacitor Polarized,100n,3E
+Capacitor Polarized,1u,3F
+TEST,1u,3F
