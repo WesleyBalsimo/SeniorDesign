@@ -23,13 +23,12 @@ def main():
     #use thread 1 to run x axis calibration
     def thread1():
         sizeX = calibrate(functions.pinLimit_x, functions.motor1, functions.x)
-        print('size of x: ' + str(sizeX))
-        print('X Coordinate: ' + str(functions.coord[functions.x]))
+        print('size of x: ' + str(sizeX) + '\n')
     _thread.start_new_thread(thread1, ()) 
 
     #use thread 0 to run y axis calibration
     sizeY = calibrate(functions.pinLimit_y, functions.motor2, functions.y)
-    print('size of y: ' + str(sizeY))
+    print('size of y: ' + str(sizeY) + '\n')
 
     #print coordinates after calibration
     print('X Coordinate: ' + str(functions.coord[functions.x]))
