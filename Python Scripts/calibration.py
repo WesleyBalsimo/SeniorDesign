@@ -8,6 +8,7 @@ import functions
 on = 1
 off = 0
 
+#this is the function that runs the motors and checks the limit switches
 def calibrate(pin, motor, coord):
     size = 0
 

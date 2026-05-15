@@ -70,6 +70,7 @@ def main():
             calibration.main()
             enableCalibrate = False
 
+        #make sure that calibration is done before allowing movement
         if enableMove and (enableCalibrate == False):
             def thread1():
                 move(functions.x, functions.motor1, sizeX, binX, numOfBinsX)
