@@ -10,7 +10,7 @@ def main():
     while(1):
         functions.fullstep_forward(functions.motor1)
         size = size + 1
-    functions.sleep(functions.motor1)
+    functions.mSleep(functions.motor1)
     print(size)
 
 if __name__ == "__main__":
