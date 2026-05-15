@@ -84,11 +84,19 @@ def pos4_5(motor):
     motor[2].value(0)
     motor[3].value(1)
 
+<<<<<<< HEAD
 def mSleep(motor):
     motor[0].value(0)
     motor[1].value(0)
     motor[2].value(0)
     motor[3].value(0)
+=======
+#def sleep(motor):
+#    motor[0].value(0)
+#    motor[1].value(0)
+#    motor[2].value(0)
+#    motor[3].value(0)
+>>>>>>> 8d59dcb2e888be2b564416336eb0ae013b69ac0e
 
 #define movement functions for full step and half step sequences
 def fullstep_forward(motor):
@@ -161,4 +169,8 @@ def boardlight(x):
         bitstream(np, 0, timing, green)
         sleep(1.0)
         bitstream(np, 0, timing, blue)
+<<<<<<< HEAD
         sleep(1.0)
+=======
+        sleep_ms(1000)
+>>>>>>> 8d59dcb2e888be2b564416336eb0ae013b69ac0e
