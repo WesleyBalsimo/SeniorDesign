@@ -19,16 +19,17 @@ def move(coord, motor, size, bin, binNum):
     distanceToMove = positionNew - positionOld
     if distanceToMove > 0:
         for i in range(distanceToMove):
-            functions.fullstep_forward(motor)
+            functions.fullstep_backward(motor)
     elif distanceToMove < 0:
         for i in range(-distanceToMove):
-            functions.fullstep_backward(motor)
+            functions.fullstep_forward(motor)
     functions.coord[coord] = positionNew
 
 
 #main function to run movement sequence for both x and y axes
 def main():
     #initialize manualy for now
+    functions.coord = 650
     sizeX = 600
     sizeY = 600
     numOfBinsX = 12

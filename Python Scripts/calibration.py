@@ -11,7 +11,7 @@ off = 0
 def calibrate(pin, motor, coord):
     size = 0
 
-    while pin.value() == 0:
+    while pin.value() != 1:
         functions.fullstep_forward(motor)
         size = size + 1
     functions.coord[coord] = size
@@ -29,6 +29,9 @@ def main():
     #use thread 0 to run y axis calibration
     sizeY = calibrate(functions.pinLimit_y, functions.motor2, functions.y)
     print('size of y: ' + str(sizeY) + '\n')
+
+    while functions.coord[functions.x] == 0:
+        sleep_ms(100)
 
     #print coordinates after calibration
     print('X Coordinate: ' + str(functions.coord[functions.x]))
