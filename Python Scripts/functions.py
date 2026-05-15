@@ -1,6 +1,6 @@
 import machine
 from machine import Pin, bitstream
-from time import sleep_ms
+from time import sleep
 
 #global x, y coordinates
 coord = [0, 0]
@@ -84,7 +84,7 @@ def pos4_5(motor):
     motor[2].value(0)
     motor[3].value(1)
 
-def sleep(motor):
+def mSleep(motor):
     motor[0].value(0)
     motor[1].value(0)
     motor[2].value(0)
@@ -93,59 +93,59 @@ def sleep(motor):
 #define movement functions for full step and half step sequences
 def fullstep_forward(motor):
     pos1(motor)
-    sleep_ms(3)
+    sleep(3 / 1_000)
     pos2(motor)
-    sleep_ms(3)
+    sleep(3 / 1_000)
     pos3(motor)
-    sleep_ms(3)
+    sleep(3 / 1_000)
     pos4(motor)
-    sleep_ms(3)
+    sleep(3 / 1_000)
 
 def halfstep_forward(motor):
     pos1(motor)
-    sleep_ms(3)
+    sleep(3 / 1_000)
     pos1_5(motor)
-    sleep_ms(3)
+    sleep(3 / 1_000)
     pos2(motor)
-    sleep_ms(3)
+    sleep(3 / 1_000)
     pos2_5(motor)
-    sleep_ms(3)
+    sleep(3 / 1_000)
     pos3(motor)
-    sleep_ms(3)
+    sleep(3 / 1_000)
     pos3_5(motor)
-    sleep_ms(3)
+    sleep(3 / 1_000)
     pos4(motor)
-    sleep_ms(3)
+    sleep(3 / 1_000)
     pos4_5(motor)
-    sleep_ms(3)
+    sleep(3 / 1_000)
 
 def fullstep_backward(motor):
     pos4(motor)
-    sleep_ms(3)
+    sleep(3 / 1_000)
     pos3(motor)
-    sleep_ms(3)
+    sleep(3 / 1_000)
     pos2(motor)
-    sleep_ms(3)
+    sleep(3 / 1_000)
     pos1(motor)
-    sleep_ms(3)
+    sleep(3 / 1_000)
 
 def halfstep_backward(motor):
     pos4_5(motor)
-    sleep_ms(3)
+    sleep(3 / 1_000)
     pos4(motor)
-    sleep_ms(3)
+    sleep(3 / 1_000)
     pos3_5(motor)
-    sleep_ms(3)
+    sleep(3 / 1_000)
     pos3(motor)
-    sleep_ms(3)
+    sleep(3 / 1_000)
     pos2_5(motor)
-    sleep_ms(3)
+    sleep(3 / 1_000)
     pos2(motor)
-    sleep_ms(3)
+    sleep(3 / 1_000)
     pos1_5(motor)
-    sleep_ms(3)
+    sleep(3 / 1_000)
     pos1(motor)
-    sleep_ms(3)
+    sleep(3 / 1_000)
     
 
 #This function doesnt really work at the moment
@@ -157,8 +157,8 @@ def boardlight(x):
     blue = bytearray([0,0,20])
     while(x == 1):
         bitstream(np, 0, timing, red)
-        sleep_ms(1000)
+        sleep(1.0)
         bitstream(np, 0, timing, green)
-        sleep_ms(1000)
+        sleep(1.0)
         bitstream(np, 0, timing, blue)
-        sleep_ms(1000)
+        sleep(1.0)
