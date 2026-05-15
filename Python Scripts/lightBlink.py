@@ -1,3 +1,5 @@
+#This is a test script to make sure the board is working
+
 from machine import Pin, bitstream
 from time import sleep
 

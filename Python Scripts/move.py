@@ -1,51 +1,82 @@
+#MicroPython on a rp2040 script to move the motors to the correct position of the grid
+#The function takes the current position, the size of the grid, and where we want to move to
+#It then figures out how many step it will take to move there and moves the motors accordingly
+
 import machine
 import _thread
 from machine import Pin
 from time import sleep_ms
 import functions
+import calibration
 
+#Interrupt handlers for buttons to start calibration and movement
+#pins 14 and 15 are used for the buttons, but can be changed if needed
+pinCalibrate = Pin(14, Pin.IN, Pin.PULL_DOWN)
+pinMove = Pin(15, Pin.IN, Pin.PULL_DOWN)
 
-#find the distance from the origin to the point to move to
-def distance(size, bin, binNum):
-    numOfPoints = binNum * 2
-    sizeOfPoints = size / numOfPoints
-    distanceToMove = sizeOfPoints * ((bin * 2) - 1)
-    return distanceToMove
+def enableCalibration(pin):
+        global enableCalibrate
+        enableCalibrate = True
+        print('Calibration started')
+
+pinCalibrate.irq(trigger=Pin.IRQ_RISING, handler=enableCalibration)
+
+def enableMovement(pin):
+    global enableMove
+    enableMove = True
+    print('Movement started')
+
+pinMove.irq(trigger=Pin.IRQ_RISING, handler=enableMovement)
+
+enableCalibrate = False
+enableMove = False
 
 #find how to get to new position baised on current position
-def move(coord, motor, size, bin, binNum):
-    positionOld = functions.coord[coord]
-    positionNew = distance(size, bin, binNum)
-    distanceToMove = positionNew - positionOld
+def move(coordIndex, motor, size, bin, numOfBins):
+    positionOld = functions.coord[coordIndex]
+    numOfPoints = numOfBins * 2
+    sizeOfPoints = size / numOfPoints
+    positionNew = sizeOfPoints * ((bin * 2) - 1)
+    distanceToMove = int(positionNew - positionOld)
     if distanceToMove > 0:
         for i in range(distanceToMove):
-            functions.fullstep_backward(motor)
+            functions.fullstep_forward(motor)
             functions.mSleep(motor)
     elif distanceToMove < 0:
         for i in range(-distanceToMove):
-            functions.fullstep_forward(motor)
+            functions.fullstep_backward(motor)
             functions.mSleep(motor)
-    functions.coord[coord] = positionNew
+    functions.coord[coordIndex] = positionOld + distanceToMove
 
 
-#main function to run movement sequence for both x and y axes
+#main function to run movement sequence for both x and y axies
 def main():
     #initialize manualy for now
-    functions.coord = 100
+    functions.coord[functions.x] = 100
     sizeX = 300
-    sizeY = 300
+    #sizeY = 300
     numOfBinsX = 12
-    numOfBinsY = 8
+    #numOfBinsY = 8
 
     #Where we want to move to
     binX = 4
-    binY = 6
+    #binY = 6
 
-    def thread1():
-        move(functions.coord[functions.x], functions.motor1, sizeX, numOfBinsX, binX)
-    _thread.start_new_thread(thread1, ())
+    global enableCalibrate, enableMove
 
-    move(functions.coord[functions.y], functions.motor2, sizeY, numOfBinsY, binY)
+    while(1):
+
+        if enableCalibrate:
+            calibration.main()
+            enableCalibrate = False
+
+        if enableMove and (enableCalibrate == False):
+            def thread1():
+                move(functions.x, functions.motor1, sizeX, binX, numOfBinsX)
+            _thread.start_new_thread(thread1, ())
+
+            #move(functions.y, functions.motor2, sizeY, binY, numOfBinsY)
+            enableMove = False
 
 if __name__ == "__main__":
     main()

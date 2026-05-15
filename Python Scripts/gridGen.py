@@ -7,7 +7,7 @@
 def main():
     matrix = []
 
-    with open('C:\\Git Projects\\SeniorDesign\\Other Files\\SD403_SP26_07 (gridview).csv', 'r') as file:
+    with open('Other Files\\SD403_SP26_07 (gridview).csv', 'r') as file:
         for line in file:
             row = line.strip().split(',')
             row = [str(i) for i in row]
